@@ -1,0 +1,6 @@
+langchain-core>=0.3
+requests>=2.31
+# For the agent demo and the MCP variant:
+# langgraph>=0.2
+# langchain[openai]  (or langchain[anthropic])
+# langchain-mcp-adapters>=0.1

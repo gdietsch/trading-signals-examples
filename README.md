@@ -16,6 +16,10 @@ Two ways to call it, no sales call needed:
 | **Pay per call ([x402](https://www.x402.org/))** | Your agent's wallet pays USDC on Base (or Solana) per request. No account, no key. | $0.005 to $0.10 per call |
 | Plans | Starter $29/mo (10k calls), Pro $99/mo (100k calls) | [pricing](https://signals.incomefather.com/pricing) |
 
+**Remote MCP server (no install):** `https://signals.incomefather.com/mcp` works in Claude, ChatGPT, Cursor and any MCP client. See [Remote MCP](#remote-mcp-claude-chatgpt-cursor-no-install).
+
+✅ [Verified on PayAPI Market](https://payapi.market/api/futures-session-brief-for-es-nq-cl-gc-zn-next-us-high-impact-releases-bls)
+
 Informational only, not investment advice. Data comes from US government public sources (BLS, Federal Reserve, Treasury, CFTC), SEC EDGAR and Base public RPC.
 
 ## 30-second start (free tier)
@@ -89,7 +93,32 @@ async def main():
 asyncio.run(main())
 ```
 
-### Claude Desktop / Cursor / Cline (MCP)
+### Remote MCP (Claude, ChatGPT, Cursor, no install)
+
+URL: `https://signals.incomefather.com/mcp` (Streamable HTTP, 12 read-only tools). No key = small anonymous daily allowance (AI trade brief 1/day). For your plan quota, send a free or paid key as `Authorization: Bearer tsk_…`, or append `?key=tsk_…` to the URL in clients that can't set headers.
+
+**Claude** (claude.ai or Claude Desktop): Settings → Connectors → *Add custom connector* → name `Trading Signals`, URL `https://signals.incomefather.com/mcp` (or `https://signals.incomefather.com/mcp?key=tsk_your_key`).
+
+**ChatGPT**: Settings → Apps & Connectors → Advanced settings → enable *Developer mode* → *Create* → MCP server URL `https://signals.incomefather.com/mcp` (add `?key=tsk_your_key` for your quota), Authentication: *No authentication*.
+
+**Cursor** (`~/.cursor/mcp.json` or `.cursor/mcp.json`), also Claude Code / Windsurf style configs: [`mcp/cursor-remote-mcp.json`](mcp/cursor-remote-mcp.json)
+
+```json
+{
+  "mcpServers": {
+    "trading-signals": {
+      "url": "https://signals.incomefather.com/mcp",
+      "headers": { "Authorization": "Bearer tsk_your_key" }
+    }
+  }
+}
+```
+
+**Claude Code**: `claude mcp add --transport http trading-signals https://signals.incomefather.com/mcp --header "Authorization: Bearer tsk_your_key"`
+
+Privacy: [signals.incomefather.com/privacy](https://signals.incomefather.com/privacy) · Terms: [signals.incomefather.com/terms](https://signals.incomefather.com/terms)
+
+### Claude Desktop / Cursor / Cline (local MCP, pays per call from your wallet)
 
 ```json
 {
@@ -131,6 +160,8 @@ Failed calls (bad input, upstream outage) return 4xx/5xx and are **never charged
 ## Related
 
 - MCP server source: [gdietsch/trading-signals-mcp](https://github.com/gdietsch/trading-signals-mcp) · npm: [`x402-trading-signals-mcp`](https://www.npmjs.com/package/x402-trading-signals-mcp)
+- Remote MCP endpoint: `https://signals.incomefather.com/mcp`
+- [Verified on PayAPI Market](https://payapi.market/api/futures-session-brief-for-es-nq-cl-gc-zn-next-us-high-impact-releases-bls)
 - x402 protocol: [x402.org](https://www.x402.org/)
 
 MIT licensed. Not affiliated with CME Group, the SEC or any data source. Not investment advice.

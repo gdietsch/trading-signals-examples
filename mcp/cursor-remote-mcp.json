@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "trading-signals": {
+      "url": "https://signals.incomefather.com/mcp",
+      "headers": { "Authorization": "Bearer tsk_your_key" }
+    }
+  }
+}

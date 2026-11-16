@@ -1,0 +1,17 @@
+{
+  "name": "crypto-token-risk-checker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Apify Actor: SAFE / CAUTION / DANGER rug-check for Solana and Base tokens, powered by the Trading Signals Toolkit API. Optional whale flow and pre-trade pack.",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node src/local-test.js"
+  },
+  "dependencies": {
+    "apify": "^3.4.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

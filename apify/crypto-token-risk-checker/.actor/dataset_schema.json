@@ -1,0 +1,124 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "title": "Token address",
+        "description": "The Solana mint or Base ERC-20 address that was checked.",
+        "example": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+      },
+      "chain": {
+        "type": "string",
+        "title": "Chain",
+        "description": "Detected or requested chain.",
+        "enum": ["solana", "base"],
+        "example": "solana"
+      },
+      "verdict": {
+        "type": ["string", "null"],
+        "title": "Verdict",
+        "description": "SAFE, CAUTION or DANGER. Mapped from the API rating safe / caution / avoid. Null if the check failed.",
+        "enum": ["SAFE", "CAUTION", "DANGER", null],
+        "example": "CAUTION"
+      },
+      "rating": {
+        "type": ["string", "null"],
+        "title": "API rating",
+        "description": "Raw API rating: safe, caution or avoid.",
+        "example": "caution"
+      },
+      "grade": {
+        "type": ["string", "null"],
+        "title": "Grade",
+        "description": "A–F letter grade from the token safety check.",
+        "example": "B"
+      },
+      "score": {
+        "type": ["number", "null"],
+        "title": "Score",
+        "description": "0–100 safety score from the token check.",
+        "example": 80
+      },
+      "reasons": {
+        "type": "array",
+        "title": "Reasons",
+        "description": "Plain-language reasons behind the verdict (mint/freeze authority, LP lock, holders, snipers, sell-route or honeypot flags).",
+        "items": { "type": "string" }
+      },
+      "ok": {
+        "type": "boolean",
+        "title": "Success",
+        "description": "True when the token verdict was returned. Failed checks are not billed.",
+        "example": true
+      },
+      "error": {
+        "type": ["string", "null"],
+        "title": "Error",
+        "description": "Error message when the check failed. Null on success."
+      },
+      "status": {
+        "type": ["integer", "null"],
+        "title": "HTTP status",
+        "description": "HTTP status from the Trading Signals API for the verdict call."
+      },
+      "whaleFlow": {
+        "type": ["object", "null"],
+        "title": "Whale flow",
+        "description": "Optional large DEX buy/sell summary when Include whale flow is on."
+      },
+      "preTradePack": {
+        "type": ["object", "null"],
+        "title": "Pre-trade pack",
+        "description": "Optional GO / CAUTION / STOP pack when Include pre-trade pack is on."
+      },
+      "tokenVerdict": {
+        "type": ["object", "null"],
+        "title": "Full token verdict",
+        "description": "Full JSON body from GET /solana/token-verdict or GET /base/token-verdict."
+      }
+    },
+    "required": ["token", "chain", "ok"]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "One row per token: rug-check verdict, grade, score and reasons.",
+      "transformation": {
+        "fields": ["token", "chain", "verdict", "grade", "score", "ok", "error", "reasons"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "token": { "label": "Token", "format": "text" },
+          "chain": { "label": "Chain", "format": "text" },
+          "verdict": { "label": "Verdict", "format": "text" },
+          "grade": { "label": "Grade", "format": "text" },
+          "score": { "label": "Score", "format": "number" },
+          "ok": { "label": "OK", "format": "boolean" },
+          "error": { "label": "Error", "format": "text" },
+          "reasons": { "label": "Reasons", "format": "array" }
+        }
+      }
+    },
+    "details": {
+      "title": "Details",
+      "description": "Full verdict plus any whale-flow or pre-trade pack add-ons.",
+      "transformation": {
+        "fields": ["token", "chain", "verdict", "grade", "score", "ok", "error", "reasons", "whaleFlow", "preTradePack", "tokenVerdict"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "token": { "label": "Token", "format": "text" },
+          "verdict": { "label": "Verdict", "format": "text" },
+          "whaleFlow": { "label": "Whale flow", "format": "object" },
+          "preTradePack": { "label": "Pre-trade pack", "format": "object" },
+          "tokenVerdict": { "label": "Full verdict", "format": "object" }
+        }
+      }
+    }
+  }
+}

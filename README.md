@@ -22,6 +22,11 @@ Two ways to call it, no sales call needed:
 
 Informational only, not investment advice. Data comes from US government public sources (BLS, Federal Reserve, Treasury, CFTC), SEC EDGAR and Base public RPC.
 
+
+## Apify Actor (token rug check)
+
+The **Crypto Token Risk Checker** Actor lives in [`apify/crypto-token-risk-checker`](apify/crypto-token-risk-checker). It wraps the Solana and Base token verdicts (SAFE / CAUTION / DANGER), with optional whale flow and pre-trade pack, for the Apify Store. Apify build URL once published: `https://github.com/gdietsch/trading-signals-examples#main:apify/crypto-token-risk-checker`.
+
 ## 30-second start (free tier)
 
 ```bash

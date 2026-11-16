@@ -1,0 +1,17 @@
+{
+  "actorSpecification": 1,
+  "name": "crypto-token-risk-checker",
+  "title": "Crypto Token Risk Checker",
+  "description": "Rug check and token scanner for Solana and Base: SAFE / CAUTION / DANGER verdict from mint authority, LP lock, holders, snipers and sell-route tests. Optional whale flow and pre-trade pack.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "defaultMemoryMbytes": 512,
+  "maxMemoryMbytes": 1024,
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "input": "./input_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}

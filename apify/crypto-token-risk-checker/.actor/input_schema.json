@@ -1,0 +1,62 @@
+{
+  "title": "Crypto Token Risk Checker",
+  "description": "Paste one or more Solana mint or Base (ERC-20) token addresses. Each token is checked for rug risk (SAFE / CAUTION / DANGER). Optionally add whale flow and a pre-trade pack.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "tokens": {
+      "title": "Token addresses",
+      "type": "array",
+      "description": "Solana mint addresses (base58) and/or Base ERC-20 contract addresses (0x…). Chain is auto-detected from the address format. Prefill examples: BONK on Solana and USDC on Base.",
+      "editor": "stringList",
+      "minItems": 1,
+      "prefill": [
+        "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ]
+    },
+    "includeWhaleFlow": {
+      "title": "Include whale flow",
+      "type": "boolean",
+      "description": "Also fetch large DEX buys and sells, net flow and an accumulation / distribution signal for each token. Adds $0.02 per token that returns a successful whale-flow result.",
+      "default": false,
+      "sectionCaption": "Optional add-ons"
+    },
+    "includePreTradePack": {
+      "title": "Include pre-trade pack",
+      "type": "boolean",
+      "description": "Also return a GO / CAUTION / STOP pre-trade decision that combines the token verdict with an OFAC screen of the token's authorities and, if you provide a wallet, that wallet's USDC pay-readiness. Adds $0.015 per token that returns a successful pack.",
+      "default": false
+    },
+    "hours": {
+      "title": "Whale-flow window (hours)",
+      "type": "integer",
+      "description": "Lookback window for whale flow, from 1 to 24 hours. Ignored unless Include whale flow is on.",
+      "minimum": 1,
+      "maximum": 24,
+      "default": 24
+    },
+    "minUsd": {
+      "title": "Minimum whale trade (USD)",
+      "type": "integer",
+      "description": "Optional minimum DEX trade size in USD (50–1,000,000). Leave empty to use the API default. Ignored unless Include whale flow is on.",
+      "minimum": 50,
+      "maximum": 1000000,
+      "nullable": true
+    },
+    "wallet": {
+      "title": "Counterparty wallet",
+      "type": "string",
+      "description": "Optional Base or Solana wallet to include in the pre-trade pack (OFAC screen + USDC pay-readiness). Ignored unless Include pre-trade pack is on.",
+      "editor": "textfield"
+    },
+    "amount": {
+      "title": "USDC amount to pay",
+      "type": "string",
+      "description": "USDC amount the wallet should be able to pay (used with Counterparty wallet). Default 1. Ignored unless Include pre-trade pack is on and a wallet is set.",
+      "editor": "textfield",
+      "default": "1"
+    }
+  },
+  "required": ["tokens"]
+}

@@ -1,5 +1,5 @@
 {
-  "title": "Crypto Token Risk Checker",
+  "title": "Rug Pull & Honeypot Checker",
   "description": "Paste one or more Solana mint or Base (ERC-20) token addresses. Each token is checked for rug risk (SAFE / CAUTION / DANGER). Optionally add whale flow and a pre-trade pack.",
   "type": "object",
   "schemaVersion": 1,

@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "crypto-token-risk-checker",
-  "title": "Crypto Token Risk Checker",
-  "description": "Rug check and token scanner for Solana and Base: SAFE / CAUTION / DANGER verdict from mint authority, LP lock, holders, snipers and sell-route tests. Optional whale flow and pre-trade pack.",
+  "title": "Rug Pull & Honeypot Checker: Solana, Pump.fun & Base",
+  "description": "Rug pull and honeypot checker for Solana (pump.fun, Raydium) and Base tokens. SAFE / CAUTION / DANGER verdict with reasons: mint and freeze authority, LP lock, sell test, holders, snipers. $0.02 per token.",
   "version": "0.1",
   "buildTag": "latest",
   "minMemoryMbytes": 256,

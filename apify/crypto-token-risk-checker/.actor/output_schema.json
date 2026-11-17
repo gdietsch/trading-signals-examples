@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Token risk verdicts",
+  "description": "One dataset row per token: verdict (SAFE/CAUTION/DANGER), grade, score, reasons, plus optional whale flow and pre-trade pack.",
+  "properties": {
+    "overview": {
+      "type": "string",
+      "title": "Verdicts",
+      "description": "Table of token risk verdicts",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+    },
+    "details": {
+      "type": "string",
+      "title": "Full details",
+      "description": "All fields including reasons and add-ons",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=details"
+    }
+  }
+}
